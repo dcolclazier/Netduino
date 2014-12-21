@@ -1,4 +1,7 @@
-﻿using Microsoft.SPOT.Hardware;
+﻿using System.Reflection;
+using System.Threading;
+using Json.NETMF;
+using Microsoft.SPOT;
 using NetduinoApplication4.LCD;
 using NetduinoApplication4.LCD.Transfer_Protocols;
 using SecretLabs.NETMF.Hardware.Netduino;
@@ -17,22 +20,23 @@ namespace NetduinoApplication4
                                                           Pins.GPIO_PIN_D2, //D2 to D7 on Lcd
                                                             2,              //Row Count (only tested with 2)
                                                             16));           //Column Count
-            
-            lcd.Write("It is done.",200,true);
+            var i2CBus = I2CBus.GetInstance();
+            var tempSensor = new IrTempSensor(0x5a,58);
 
+            lcd.Write("It is done.",200,true);
+            
             while (true)
             {
-                lcd.SetCursorPosition(0,1);   
+                var registerData = i2CBus.ReadRegister(tempSensor.Config, 
+                    (byte)IrTempSensor.RamRegisters.ObjectTempOne, 1000);
                 
-                lcd.Write(Utility.GetMachineTime().Hours.ToString());
-                lcd.Write(":");
-                lcd.Write(Utility.GetMachineTime().Minutes.ToString());
-                lcd.Write(":");
-                lcd.Write(Utility.GetMachineTime().Seconds.ToString());
+                var temp = tempSensor.CalculateTemp(registerData, IrTempSensor.Temp.Fahrenheit);
+
+                lcd.SetCursorPosition(0, 1);
+                lcd.Write(temp.ToString().Substring(0,5));
+                Thread.Sleep(100);               
             }
-
-
-        }
-
+        }        
     }
 }
+

@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Threading;
 using Microsoft.SPOT.Hardware;
@@ -6,7 +7,7 @@ using NetduinoApplication4.LCD.Abstract.Interfaces;
 
 namespace NetduinoApplication4.LCD.Transfer_Protocols
 {
-    public class GpioLcdTransferProtocol : ILcdTransferProtocol
+    public class GpioLcdTransferProtocol : ILcdTransferProtocol, IDisposable
     {
         #region Properties
         public bool IsVisible { get { return _isVisible; } set { _isVisible = value; UpdateDisplayOptions(); } }
@@ -84,6 +85,16 @@ namespace NetduinoApplication4.LCD.Transfer_Protocols
                 _cursorPosition += 1;
                 Thread.Sleep(delay);
             }
+        }
+        public void Dispose()
+        {
+            _rsPort.Dispose();
+            _enablePort.Dispose();
+            _d4.Dispose();
+            _d5.Dispose();
+            _d6.Dispose();
+            _d7.Dispose();
+
         }
         #endregion
 
@@ -217,5 +228,7 @@ namespace NetduinoApplication4.LCD.Transfer_Protocols
             Write(buffer);
         }
         #endregion
+
+        
     }
 }

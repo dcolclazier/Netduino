@@ -33,6 +33,8 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
+    <Compile Include="IrTempSensor\Singleton\I2CBus.cs" />
+    <Compile Include="IrTempSensor\IrTempSensor.cs" />
     <Compile Include="LCD\Abstract\Enums\Command.cs" />
     <Compile Include="LCD\Abstract\Enums\DisplayMode.cs" />
     <Compile Include="LCD\Abstract\Enums\EntryMode.cs" />
@@ -44,8 +46,14 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Json.NetMF">
+      <HintPath>..\packages\Json.NetMF.1.3.0.0\lib\netmf42\Json.NetMF.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.Native" />
     <Reference Include="SecretLabs.NETMF.Hardware.Netduino" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
