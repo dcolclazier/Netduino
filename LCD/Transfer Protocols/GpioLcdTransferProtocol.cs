@@ -154,7 +154,7 @@ namespace NetduinoApplication4.LCD.Transfer_Protocols
             _cursorPosition = 0;
 
             var charArray = str.ToCharArray();
-            var arraySize = (int)System.Math.Ceiling((double)(str.Length + _cursorPosition) / _columnCount);
+            var arraySize = (int)Math.Ceiling((double)(str.Length + _cursorPosition) / _columnCount);
             var stringArray = new string[arraySize];
             
             for (var i = 0; i < charArray.Length; i++)

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Reflection;
 using System.Threading;
-using Json.NETMF;
-using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using NetduinoApplication4.LCD;
 using NetduinoApplication4.LCD.Transfer_Protocols;
@@ -12,8 +9,10 @@ namespace NetduinoApplication4
 {
     public static class Program
     {
-        public static void Main()
+        public static void Main()A
         {
+
+            
             var lcd = new Lcd(new GpioLcdTransferProtocol(Pins.GPIO_PIN_D12, //D12 on NetDuino to RS
                                                           Pins.GPIO_PIN_D11, //D11 to Enable
                                                           Pins.GPIO_PIN_D5, //D5 to D4 on Lcd
