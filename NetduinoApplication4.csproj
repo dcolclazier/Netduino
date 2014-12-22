@@ -33,7 +33,7 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="IrTempSensor\Singleton\I2CBus.cs" />
+    <Compile Include="I2CBus\I2CBus.cs" />
     <Compile Include="IrTempSensor\IrTempSensor.cs" />
     <Compile Include="LCD\Abstract\Enums\Command.cs" />
     <Compile Include="LCD\Abstract\Enums\DisplayMode.cs" />
